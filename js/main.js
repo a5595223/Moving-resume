@@ -15,7 +15,7 @@ function writeCode(prefix, code, fn) {
             fn()
         }
 
-    }, 100)
+    }, 0)
 
 }
 
@@ -25,8 +25,7 @@ function writeMarkdown(markdown, fn) {
     let id = setInterval(() => {
         n += 1
 
-        domPaper.innerHTML = markdown.substring(0, n)
-
+        domPaper.innerHTML = marked(markdown.substring(0, n))
         domPaper.scrollTop = domPaper.scrollHeight
         if (n >= markdown.length) {
             clearInterval(id)
@@ -34,17 +33,10 @@ function writeMarkdown(markdown, fn) {
 
         }
 
-    }, 100)
+    }, 0)
 }
 
 var result = `
-/* 面试官你好，我是冯国欣
-// 我将以动画的形式来介绍自己
-
-// 只用文字太单调啦
-// 我就用代码来介绍吧
-
-// 首先准备一些样式 */
 *{
 transition: all 1s;
 }
@@ -66,15 +58,6 @@ html {
 .token.function{
     color: #DD4A68;
 }
-
-/*加点3D效果*/
-#code{
-    transform:rotate(360deg)
-}
-
-/*不玩啦，接下来我来介绍一下我自己吧
- 我需要一张白纸
-*/
 #code{
     position: fixed;
     left: 0;
@@ -120,22 +103,18 @@ var result2 = `
 var md = `
 自我介绍
 
-我叫冯国欣
+姓名：冯国欣
 1997年2月生
-想应聘前端岗位
+城市：上海
+基础：入谷前自学啦 4 个月
 
-技能
-熟悉HTML CSS JS
+报名原因：目前在制药公司不脱产学习。
+待遇工资稳定，不喜欢这样的环境。经哥哥介绍前端，
+感觉很感兴趣，就开始学习前端。
+自学由于掌握的知识点零零散散，无法系统掌握，
+于是报名饥人谷希望得到系统学习
 
-项目
-canvas 画板
-键盘导航网站
-苹果轮播
-
-联系方式
-微信：Aa5595223
-电话:13020165061
-邮箱:782067903@qq.com
+学习目标：争取在金9能转行成功，找到心仪工作
 `
 
 writeCode('', result, () => {
@@ -149,6 +128,8 @@ writeCode('', result, () => {
 })
 
 
+
+
 function createPaper(fn) {
     var paper = document.createElement('div')
     paper.id = 'paper'
@@ -159,6 +140,7 @@ function createPaper(fn) {
     fn.call()
 }
 
+document.getElementsByClassName('content').innerHTML = marked('# Marked in the browser\n\nRendered by **HTML**.');
 // function fn3(preResult) {
 //     var result = `
 //     #paper{
